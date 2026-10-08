@@ -81,7 +81,7 @@ def generate_and_save(name, param_expr, mm, V, Q, bcs, lambda_, mu, p_load,
 
 # ── CLI ───────────────────────────────────────────────────────
 
-CASES = ["split", "single_inclusion", "two_inclusions"]
+CASES = ["split", "single_inclusion", "two_inclusions", "homogeneous"]
 
 parser = argparse.ArgumentParser(description="Generate forward elasticity data.")
 parser.add_argument("cases", nargs="*", default=CASES, choices=CASES,
@@ -144,5 +144,13 @@ if "two_inclusions" in args.cases:
                           {"cx": 1.6, "cy": 1.3, "a": 0.2, "b": 0.6, "val": 3.00},
                           {"cx": 1.3, "cy": 1.6, "a": 0.6, "b": 0.2, "val": 3.00},
                       ]),
+                      mm_true, V_t, Q_t, bcs_t, lambda_, mu, p_load,
+                      mollify_eps=args.mollify)
+
+# ── Test case 4: homogeneous mu ────────────────────
+
+if "homogeneous" in args.cases:
+    generate_and_save("linear_symcube_homogeneous_p10",
+                      Constant(1.0),
                       mm_true, V_t, Q_t, bcs_t, lambda_, mu, p_load,
                       mollify_eps=args.mollify)

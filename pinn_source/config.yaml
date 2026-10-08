@@ -18,7 +18,7 @@ inverse_params:
 
 net:
   model_path: false
-  layers: [256, 256, 256, 256, 256]
+  layers:  [256, 256, 256, 256, 256]
   residual_connection: false
   BL: true
   BL_params:
@@ -41,7 +41,7 @@ model:
 
 numPDE: 8000
 numBCN: 1000
-numData: 2000
+numData: 1000 # 2000
 numTest: 1000
 
 mesh_loss: false

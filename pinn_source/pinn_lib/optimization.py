@@ -320,7 +320,7 @@ def _minimize_scipy(pb, method_name, num_epochs):
 # TensorFlow Probability L-BFGS (GPU-native)
 # --------------------------------------------------------------------------- #
 
-def _minimize_tfp_lbfgs(pb, num_epochs, log_frequency=500):
+def _minimize_tfp_lbfgs(pb, num_epochs, log_frequency=100):
     pb.history['transitions'].append({'iter': pb.iteration_offset, 'method': 'L-BFGS'})
     import tensorflow_probability as tfp
 

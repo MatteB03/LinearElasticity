@@ -116,7 +116,7 @@ class PINNLossHandler:
             'nzminus': lambda x, model: constitutive.Dirichlet(x, model, dataset.boundary_data['nzminus'], component = 2),
             'nzplus':  lambda x, model, traction=None: constitutive.Neumann(x, stress_model, 2,
                 traction if traction is not None else dataset.boundary_data['nzplus']),
-            # Tangential zero-traction on symmetry faces
+            # Tangential zero-traction on symmetry faces # no slide conditiopn on symm faces
             'nxminus_tan': lambda x, model: constitutive.TangentialNeumann(x, stress_model, 0, [1, 2]),
             'nyminus_tan': lambda x, model: constitutive.TangentialNeumann(x, stress_model, 1, [0, 2]),
             'nzminus_tan': lambda x, model: constitutive.TangentialNeumann(x, stress_model, 2, [0, 1]),
