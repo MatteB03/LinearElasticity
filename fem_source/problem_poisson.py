@@ -22,6 +22,15 @@ def source_term_sines(mesh):
     xyz = SpatialCoordinate(mesh)
     return 3*pi**2 * sin(pi*xyz[0]) * sin(pi*xyz[1]) * sin(pi*xyz[2])
 
+def source_term_sines_pts(mesh, L1, L2, L3):
+    xyz = SpatialCoordinate(mesh)
+    k2 = pi**2 * (1/L1**2 + 1/L2**2 + 1/L3**2)
+    return k2 * sin(pi*xyz[0]/L1) * sin(pi*xyz[1]/L2) * sin(pi*xyz[2]/L3)
+
+def exact_solution_sines(mesh,L1,L2,L3):
+    xyz = SpatialCoordinate(mesh)
+    return sin(pi*xyz[0]/L1) * sin(pi*xyz[1]/L2) * sin(pi*xyz[2]/L3)
+
 # 2[y(1-y)z(1-z)+x(1-x)z(1-z)+x(1-x)y(1-y)].
 def source_term_bubble(mesh):
     xyz = SpatialCoordinate(mesh)
@@ -44,12 +53,7 @@ def source_term_cosines(mesh, k, dim=2):
     elif dim == 3:
         return -(u_ii(xyz[0])*term_i(xyz[1])*term_i(xyz[2]) + u_ii(xyz[1])*term_i(xyz[0])*term_i(xyz[2]) + u_ii(xyz[2])*term_i(xyz[0])*term_i(xyz[1]))
 
-# atm this is useless
-# def exact_solution_sines(mesh):
-#     xyz = SpatialCoordinate(mesh)
-#     return sin(pi*xyz[0]) * sin(pi*xyz[1]) * sin(pi*xyz[2])
-
-# here there used to be strain_energy, I simply replaced it with the energy for the poison problem
+# here there used to be strain_energy, I simply replaced it with the energy for the generalized poisson problem
 def generalized_poisson_energy(u, f, rho):
     return (0.5*inner(grad(u), grad(u)) + 0.5*rho*u**2 - f*u)*dx
 

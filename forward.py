@@ -3,8 +3,7 @@ import numpy as np
 import argparse
 from pathlib import Path
 
-from fem_source import (create_box_mesh, create_spaces, symmetry_bcs,
-                        solve_forward)
+from fem_source import (create_box_mesh, create_spaces, bilinear_form)
 
 # Output directory
 out_dir = Path("data")
